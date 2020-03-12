@@ -2,11 +2,31 @@ const path = require('path')
 const axios = require('axios')
 const bodyParser = require('body-parser')
 
+const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg'
+const headers = {
+  origin: 'https://y.qq.com/',
+  'sec-fetch-site': 'same-site',
+  'access-control-allow-origin': 'https://y.qq.com',
+  'access-control-expose-headers': 'Area',
+  referer: 'https://c.y.qq.com/'
+}
+const vueAxios = axios.create({
+  headers,
+  timeout: 3000
+})
+const sendAxiosAjax = (url, params) => {
+  return Promise.resolve(
+    vueAxios.get(url, {
+      params
+    })
+  )
+}
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 module.exports = {
+  publicPath: './',
   lintOnSave: false,
   chainWebpack(config) {
     config.resolve.alias
@@ -26,7 +46,17 @@ module.exports = {
   devServer: {
     disableHostCheck: true, // 禁用webpack热重载检查 解决热更新失效问题
     before(app) {
-      app.get('/api/getDiscList', function(req, res) {
+      app.get('/api/getRecomSlider', (req, res) => {
+        sendAxiosAjax(url, req.query)
+          .then(response => {
+            console.log(response.state)
+            return res.json(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      })
+      app.get('/api/getDiscList', (req, res) => {
         const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
         axios.get(url, {
           headers: {
