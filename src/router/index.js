@@ -6,52 +6,57 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue')
+    redirect: '/recommend'
   },
   {
     path: '/recommend',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue'),
+    name: 'Recommend',
+    component: () => import(/* webpackChunkName: "Recommend" */ '../views/recommend/index.vue')
+  },
+  {
+    path: '/singer',
+    name: 'SingerList',
+    component: () => import(/* webpackChunkName: "singer" */ '../views/singer/index.vue'),
     children: [
       {
         path: ':id',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue')
+        component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue')
       }
     ]
   },
   {
     path: '/singer',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue'),
+    component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue'),
     children: [
       {
         path: ':id',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue')
+        component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue')
       }
     ]
   },
   {
     path: '/rank',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue'),
+    component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue'),
     children: [
       {
         path: ':id',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue')
+        component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue')
       }
     ]
   },
   {
     path: '/search',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue'),
+    component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue'),
     children: [
       {
         path: ':id',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue')
+        component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue')
       }
     ]
   },
   {
     path: '/user',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue')
+    component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue')
   }
 ]
 

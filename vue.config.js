@@ -49,7 +49,6 @@ module.exports = {
       app.get('/api/getRecomSlider', (req, res) => {
         sendAxiosAjax(url, req.query)
           .then(response => {
-            console.log(response.state)
             return res.json(response.data)
           })
           .catch(e => {
