@@ -1,6 +1,6 @@
 <template>
   <div class="recommend">
-    <ScrollView class="recommend-content" ref="scroll" :data="discList" :listenPullingUp="listenPullingUp" :pullUpLoad="pullUpLoad" @pullingUp="pullingUp">
+    <ScrollView class="recommend-content" ref="scroll" :data="discList" :listenPullingUp="listenPullingUp" :scrollbar="scrollbar" :pullUpLoad="pullUpLoad" :listenPullingDown="listenPullingDown" :pullDownRefresh="pullDownRefresh" @pullingUp="pullingUp" @pullingDown="pullingDown">
       <div>
         <div v-if="sliderList.length" class="slider-wrapper">
           <div class="slider-content">
@@ -13,7 +13,7 @@
             </slider>
           </div>
         </div>
-        <div class="recommend-list">
+        <div class="recommend-list" v-if="discList.length>0">
           <h1 class="recommend-list-title">热门歌单推荐</h1>
           <ul>
             <li @click="selectItem(item)" v-for="(item,index) in discList" class="recommend-list-item" :key="index">
@@ -28,30 +28,44 @@
           </ul>
         </div>
       </div>
+      <div class="loading-container" v-show="!discList.length">
+        <loading />
+      </div>
     </ScrollView>
-
   </div>
 </template>
 
 <script>
 import { getSliderList, getDiscList } from 'api/recommend'
 import Slider from 'base/slider/'
-import ScrollView from '@/base/scroll-view/'
-
+import ScrollView from 'base/scroll-view/'
+import Loading from 'base/loading/'
 import { ERR_OK } from 'api/config'
 
 export default {
   name: 'recommend',
   components: {
-    Slider, ScrollView
+    Slider, ScrollView, Loading
   },
   data() {
     return {
       sliderList: [],
       discList: [],
+      // 上拉加载配置项
       pullUpLoad: {
         threshold: 20
-      }
+      },
+      // 滚动条配置项
+      scrollbar: {
+        fade: true
+      },
+      // 下拉刷新配置项
+      pullDownRefresh: {
+        threshold: 50,
+        stop: 20
+      },
+      listenPullingUp: true, // 是否监听上拉加载
+      listenPullingDown: true // 是否监听下拉刷新
     }
   },
   async created() {
@@ -82,11 +96,18 @@ export default {
         }, 20)
       }
     },
-    listenPullingUp() {
-
+    // 下拉刷新
+    pullingDown() {
+      console.log('dfasf')
+      this.$refs.scroll.finishPullDown()
     },
+    // 上拉加载
     pullingUp() {
       console.log('lai')
+    },
+    // 打开歌单
+    selectItem(item) {
+      console.log(item)
     }
   }
 }
