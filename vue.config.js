@@ -46,7 +46,8 @@ module.exports = {
   devServer: {
     disableHostCheck: true, // 禁用webpack热重载检查 解决热更新失效问题
     before(app) {
-      app.get('/api/getRecomSlider', (req, res) => {
+      // 获取轮播图
+      app.get('/api/getSliderList', (req, res) => {
         sendAxiosAjax(url, req.query)
           .then(response => {
             return res.json(response.data)
@@ -55,6 +56,7 @@ module.exports = {
             console.log(e)
           })
       })
+      // 获取热歌歌单
       app.get('/api/getDiscList', (req, res) => {
         const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
         axios.get(url, {
@@ -69,8 +71,18 @@ module.exports = {
           console.log(e)
         })
       })
+      // pc端歌手列表
+      app.get('/api/getSingerList', (req, res) => {
+        sendAxiosAjax(url, req.query)
+          .then(response => {
+            return res.json(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      })
 
-      app.get('/api/getCdInfo', function(req, res) {
+      app.get('/api/getCdInfo', (req, res) => {
         const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
         axios.get(url, {
           headers: {

@@ -22,7 +22,7 @@ export function getSliderList() {
       }
     }
   }
-  return fetch('', '/api/getRecomSlider', 'get', data)
+  return fetch('', '/api/getSliderList', 'get', data)
 }
 
 // 歌单列表

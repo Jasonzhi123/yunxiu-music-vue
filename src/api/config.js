@@ -18,8 +18,9 @@ export const qqMusicConfigParam = {
   needNewCode: 0
 }
 
-export const options = {
-  param: 'jsonpCallback'
+export const jsonpOptions = {
+  param: 'jsonpCallback',
+  prefix: 'jp'
 }
 
 export const ERR_OK = 0
