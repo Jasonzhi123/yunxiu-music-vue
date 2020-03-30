@@ -81,7 +81,16 @@ module.exports = {
             console.log(e)
           })
       })
-
+      // 获取歌手详情
+      app.get('/getSingerSongList', (req, res) => {
+        sendAxiosAjax(url, req.query)
+          .then(response => {
+            return res.json(response.data)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+      })
       app.get('/api/getCdInfo', (req, res) => {
         const url = 'https://c.y.qq.com/qzone/fcg-bin/fcg_ucc_getcdinfo_byids_cp.fcg'
         axios.get(url, {

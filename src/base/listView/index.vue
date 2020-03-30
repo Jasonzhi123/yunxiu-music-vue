@@ -113,6 +113,9 @@ export default {
         height += item.clientHeight
         this.listHeight.push(height)
       }
+    },
+    selectItem(item) {
+      this.$emit('selectItem', item)
     }
   },
   watch: {

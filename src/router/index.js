@@ -20,7 +20,7 @@ const routes = [
     children: [
       {
         path: ':id',
-        component: () => import(/* webpackChunkName: "recommend" */ '../views/recommend/index.vue')
+        component: () => import(/* webpackChunkName: "singerDetail" */ '../views/singerDetail/index.vue')
       }
     ]
   },

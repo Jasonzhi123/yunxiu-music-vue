@@ -1,6 +1,7 @@
 <template>
   <div class="singer-page">
-    <ListView :data="singerList"></ListView>
+    <ListView :data="singerList" @selectItem="selectSinger"></ListView>
+    <router-view />
   </div>
 </template>
 
@@ -9,9 +10,12 @@ import { getSingerList } from 'api/singerList'
 import { ERR_OK } from 'api/config'
 import Singer from 'common/js/singer'
 import ListView from 'base/listView/'
+import { createNamespacedHelpers } from 'vuex'
 
+const { mapMutations } = createNamespacedHelpers('singer')
 const HOT_SINGER_LEN = 10
 const HOT_NAME = '热门'
+
 export default {
   name: 'singerList',
   data() {
@@ -31,8 +35,14 @@ export default {
       const { code, data: { list }} = await getSingerList()
       if (code === ERR_OK) {
         this.singerList = this.normalizeSinger(list)
-        console.log(this.singerList)
       }
+    },
+    // 点击歌手
+    selectSinger(singer) {
+      this.$router.push({
+        path: `/singer/${singer.id}`
+      })
+      this.setSinger(singer)
     },
     // 格式化数据
     normalizeSinger(list) {
@@ -80,7 +90,8 @@ export default {
         return a.title.charCodeAt(0) - b.title.charCodeAt(0)
       })
       return hot.concat(ret)
-    }
+    },
+    ...mapMutations(['setSinger'])
   }
 }
 </script>
