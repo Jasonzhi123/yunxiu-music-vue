@@ -82,7 +82,7 @@ module.exports = {
           })
       })
       // 获取歌手详情
-      app.get('/getSingerSongList', (req, res) => {
+      app.get('/api/getSingerSongList', (req, res) => {
         sendAxiosAjax(url, req.query)
           .then(response => {
             return res.json(response.data)

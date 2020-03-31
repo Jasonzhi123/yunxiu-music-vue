@@ -12,10 +12,16 @@ const mutations = {
     state.singer = res
   }
 }
+const getters = {
+  getSinger(state) {
+    return state.singer
+  }
+}
 
 export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
+  getters
 }

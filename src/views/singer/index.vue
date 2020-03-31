@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { getSingerList } from 'api/singerList'
+import { getSingerList } from 'api/singerInfo'
 import { ERR_OK } from 'api/config'
 import Singer from 'common/js/singer'
 import ListView from 'base/listView/'

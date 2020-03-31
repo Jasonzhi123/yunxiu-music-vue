@@ -53,10 +53,10 @@ export function getPCSingerList() {
   return fetch('', '/api/getSingerList', 'get', data)
 }
 // 获取歌手的歌单列表
-export function getSingerSongList(singer) {
+export function getSingerSongList(singer, pagesize = 20) {
   const data = {
     ...qqMusicConfigParam,
-    '-': 'getSingerSong5820184818895127',
+    '-': 'getSingerSong6924947693704',
     data: {
       comm: {
         ct: 24,
@@ -68,7 +68,7 @@ export function getSingerSongList(singer) {
           order: 1,
           singerMid: singer.id,
           begin: 0,
-          num: 20
+          num: pagesize
         },
         module: 'musichall.song_list_server'
       }
