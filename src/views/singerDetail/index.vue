@@ -1,10 +1,6 @@
 <template>
   <transition appear name="slide">
-    fasdf
-    <div class="music-list">
-      dfsfasdf
-    </div>
-    <!-- <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list> -->
+    <music-list :title="title" :bgImage="bgImage" :songsData="songList"></music-list>
   </transition>
 </template>
 <script>
@@ -12,13 +8,17 @@ import { getSingerSongList } from 'api/singerInfo'
 import { createNamespacedHelpers, mapState } from 'vuex'
 import { ERR_OK } from 'api/config'
 import { createSong } from 'common/js/song'
-
+import MusicList from 'components/musicList/'
 const { mapGetters } = createNamespacedHelpers('singer')
+
 export default {
   name: 'singerDetail',
+  components: {
+    MusicList
+  },
   data() {
     return {
-
+      songList: []
     }
   },
   created() {
@@ -44,6 +44,13 @@ export default {
     }
   },
   computed: {
+    title() {
+      return this.singer.name
+    },
+    bgImage() {
+      console.log(this.singer.avatar)
+      return this.singer.avatar
+    },
     ...mapState({
       singer: state => state.singer.singer
     }),
