@@ -37,7 +37,7 @@ let minTranslateY = 0 // 歌单滚动最小坐标 Y
 let imgHeight = 0 // 背景图片高度
 
 const transform = prefixStyle('transform') // transform 添加css前缀
-const backdrop = prefixStyle('backdrop-filter')
+const backdrop = prefixStyle('backdrop-filter')// filter 添加css前缀
 
 export default {
   name: 'musicList',
